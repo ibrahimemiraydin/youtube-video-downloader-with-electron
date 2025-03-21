@@ -25,7 +25,7 @@ Projeyi yerel makinenize kurmak için aşağıdaki adımları izleyin:
    cd yt-downloader-2
 
 2. **Scriptler**
-    npm run tailwind-build : output.css dosyasını oluşturmak için.
-    npm start: Geliştirici olarak uygulamayı çalıştırabilirsiniz
-    npm run build : Electron ile uygulamayı build etmenizi sağlar 
+    - npm run tailwind-build : output.css dosyasını oluşturmak için.
+    - npm start: Geliştirici olarak uygulamayı çalıştırabilirsiniz
+    - npm run build : Electron ile uygulamayı build etmenizi sağlar 
     
