@@ -1,0 +1,35 @@
+# Node.js bağımlılıkları
+node_modules/
+package-lock.json
+
+# Derleme ve yapı çıktıları
+dist/
+dist-unpacked/
+*.exe
+*.dmg
+*.AppImage
+
+# Tailwind CSS derleme çıktıları
+styles/output.css
+
+# Yerel yapılandırma ve log dosyaları
+*.log
+config.json
+
+# Geliştirme sırasında oluşan geçici dosyalar
+*.tmp
+*.bak
+
+# Sistem dosyaları
+.DS_Store
+Thumbs.db
+
+# Editör dosyaları
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Büyük binary dosyalar (isteğe bağlı, boyut sınırına dikkat edin)
+bin/yt-dlp.exe
+ffmpeg/bin/ffmpeg.exe

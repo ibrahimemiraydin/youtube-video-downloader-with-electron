@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>YouTube Video Downloader</title>
+  <link href="./styles/output.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      padding: 2rem;
+      width: 100%;
+      max-width: 700px;
+      transition: all 0.3s ease;
+    }
+    .thumbnail-container {
+      position: relative;
+      padding-top: 56.25%; /* 16:9 oranı */
+      margin-bottom: 1.5rem;
+      border-radius: 1rem;
+      overflow: hidden;
+      background: #e5e7eb;
+    }
+    #thumbnail {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.3s ease;
+    }
+    .thumbnail-placeholder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #6b7280;
+      font-size: 1.25rem;
+      font-weight: 500;
+      background: #e5e7eb;
+    }
+    .thumbnail-placeholder.hidden {
+      display: none;
+    }
+    .progress-bar {
+      transition: width 0.3s ease-in-out;
+    }
+    @media (max-width: 640px) {
+      .container {
+        padding: 1.5rem;
+        max-width: 100%;
+      }
+      h1 {
+        font-size: 1.5rem;
+      }
+      .thumbnail-placeholder {
+        font-size: 1rem;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">YouTube Video Downloader</h1>
+    
+    <div class="thumbnail-container">
+      <div id="thumbnail-placeholder" class="thumbnail-placeholder">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14m-6 6H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v12a2 2 0 01-2 2h-4" />
+        </svg>
+        <span>URL Bekleniyor...</span>
+      </div>
+      <img id="thumbnail" src="" alt="Video Thumbnail" class="opacity-0" />
+    </div>
+
+    <div class="mb-4">
+      <input 
+        type="text" 
+        id="videoUrl" 
+        class="w-full p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all" 
+        placeholder="Video URL'sini girin" 
+      />
+    </div>
+
+    <button 
+      onclick="fetchFormats()" 
+      class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition duration-200 shadow-md hover:shadow-lg mb-4"
+    >
+      Formatları Getir
+    </button>
+
+    <select 
+      id="formatSelect" 
+      class="w-full p-3 rounded-lg border border-gray-300 mb-4 disabled:bg-gray-100 disabled:cursor-not-allowed transition-all" 
+      disabled
+    >
+      <option value="">Önce formatları getirin</option>
+    </select>
+
+    <div class="flex mb-4 gap-2">
+      <input 
+        type="text" 
+        id="downloadDir" 
+        class="flex-grow p-3 rounded-lg border border-gray-300" 
+        placeholder="İndirme klasörü seçilecek" 
+        readonly
+      />
+      <button 
+        onclick="selectDownloadFolder()" 
+        class="bg-gray-600 text-white p-3 rounded-lg hover:bg-gray-700 transition duration-200 shadow-md hover:shadow-lg"
+      >
+        Seç
+      </button>
+    </div>
+
+    <button 
+      onclick="downloadVideo()" 
+      class="w-full bg-green-600 text-white p-3 rounded-lg hover:bg-green-700 transition duration-200 shadow-md hover:shadow-lg mb-4"
+    >
+      İndir
+    </button>
+
+    <p id="status" class="text-center text-gray-600 mb-2">Durum: Bekleniyor...</p>
+
+    <div id="progressBar" class="w-full bg-gray-200 rounded-full h-4 hidden">
+      <div 
+        id="progressFill" 
+        class="progress-bar bg-blue-600 h-4 rounded-full" 
+        style="width: 0%;" 
+        aria-valuenow="0" 
+        aria-valuemin="0" 
+        aria-valuemax="100"
+      ></div>
+    </div>
+  </div>
+  <script src="renderer.js"></script>
+</body>
+</html>

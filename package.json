@@ -1,0 +1,57 @@
+{
+  "name": "youtube-downloader",
+  "version": "1.0.0",
+  "description": "A simple YouTube video downloader built with Electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "tailwind": "npx tailwindcss -i ./styles/input.css -o ./styles/output.css --watch",
+    "tailwind-build": "npx tailwindcss -i ./styles/input.css -o ./styles/output.css"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "electron": "^35.0.2",
+    "electron-builder": "^25.1.8",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.1"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.0.14"
+  },
+  "build": {
+    "appId": "com.example.ytdownloader",
+    "productName": "YouTube Downloader",
+    "icon": "desktop-icon.ico",
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer.js",
+      "index.html",
+      "styles/output.css"
+    ],
+    "extraResources": [
+      {
+        "from": "ffmpeg/",
+        "to": "ffmpeg/"
+      },
+      {
+        "from": "bin/yt-dlp.exe",
+        "to": "bin/yt-dlp.exe"
+      },
+      "desktop-icon.ico",
+      "setup-icon.ico"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "desktop-icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "setup-icon.ico"
+    }
+  }
+}
